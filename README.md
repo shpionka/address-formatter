@@ -2,7 +2,7 @@
 
 Address formatter converts raw string into structured object with house number and street fields.
 
-Github Action ✅
+[Github Actions](https://github.com/shpionka/address-formatter/actions) ✅
 
 ### General approach
 
