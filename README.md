@@ -29,3 +29,5 @@ Check out `AddressFixture` with some predefined test data.
 ```
 ./gradlew test
 ```
+
+Also see test results in [Github Actions](https://github.com/shpionka/address-formatter/actions/runs/238058360)
