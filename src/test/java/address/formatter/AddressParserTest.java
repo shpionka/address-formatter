@@ -1,26 +1,39 @@
 package address.formatter;
 
-import junit.framework.TestCase;
-import org.junit.Assert;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
-public class AddressParserTest extends TestCase {
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-    public void testParseSimpleStreetNameWithHouseNumber() {
-        String input = "Winterallee 3";
+public class AddressParserTest {
+
+    @ParameterizedTest
+    @MethodSource("address.formatter.AddressFixture#generalAddressCases")
+    public void testParseSimpleStreetNameWithHouseNumber(AddressFixture fixture) {
         Address address = new ParserResolver()
-                .resolve(input)
+                .resolve(fixture.getRawString())
                 .parse();
-        Assert.assertEquals("Winterallee", address.getStreet());
-        Assert.assertEquals("3", address.getHouseNumber());
+        assertEquals(fixture.getExpectedAddress().getStreet(), address.getStreet());
+        assertEquals(fixture.getExpectedAddress().getHouseNumber(), address.getHouseNumber());
     }
 
-    public void testParseAddressStartingWithHouseNumber() {
-        String input = "200 Broadway Av";
+    @ParameterizedTest
+    @MethodSource("address.formatter.AddressFixture#startingWithNumberCases")
+    public void testParseAddressStartingWithHouseNumber(AddressFixture fixture) {
         Address address = new ParserResolver()
-                .resolve(input)
+                .resolve(fixture.getRawString())
                 .parse();
-        Assert.assertEquals("Broadway Av", address.getStreet());
-        Assert.assertEquals("200", address.getHouseNumber());
+        assertEquals(fixture.getExpectedAddress().getStreet(), address.getStreet());
+        assertEquals(fixture.getExpectedAddress().getHouseNumber(), address.getHouseNumber());
+    }
 
+    @ParameterizedTest
+    @MethodSource("address.formatter.AddressFixture#prefixNoHouseNumberCases")
+    public void testParseAddressWithPrefixedHouseNumbers(AddressFixture fixture) {
+        Address address = new ParserResolver()
+                .resolve(fixture.getRawString())
+                .parse();
+        assertEquals(fixture.getExpectedAddress().getStreet(), address.getStreet());
+        assertEquals(fixture.getExpectedAddress().getHouseNumber(), address.getHouseNumber());
     }
 }

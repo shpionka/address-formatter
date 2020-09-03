@@ -32,8 +32,8 @@ public abstract class BaseParser implements IParser {
     public Address parse() {
         final Matcher matcher = pattern.matcher(input);
         if (matcher.find()) {
-            final String houseNumber = matcher.group(houseGroup).trim();
-            final String street = matcher.group(streetGroup).trim();
+            final String houseNumber = matcher.group(houseGroup).replaceAll("([,;!])", "").trim();
+            final String street = matcher.group(streetGroup).replaceAll("([,;!])", "").trim();
 
             return new Address(street, houseNumber);
         } else {
