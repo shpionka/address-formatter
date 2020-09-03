@@ -2,6 +2,8 @@
 
 Address formatter converts raw string into structured object with house number and street fields.
 
+Github Action ✅
+
 ### General approach
 
 Address raw strings can take wide variety of formats and it's a hard task to solve them all at the same time. 
@@ -29,5 +31,3 @@ Check out `AddressFixture` with some predefined test data.
 ```
 ./gradlew test
 ```
-
-Also see test results in [Github Actions](https://github.com/shpionka/address-formatter/actions/runs/238058360)
