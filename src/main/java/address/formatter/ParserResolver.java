@@ -2,7 +2,7 @@ package address.formatter;
 
 import address.formatter.parsers.PrefixedHouseNumberAddressParser;
 import address.formatter.parsers.BackwardsStreetNameParser;
-import address.formatter.parsers.GeneralAddressParcer;
+import address.formatter.parsers.GeneralAddressParser;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -12,8 +12,7 @@ public class ParserResolver {
     // A regular expression to check if an input starts with a number
     public static final Pattern numberPattern = Pattern.compile("\\d+");
 
-
-    // A regular expression
+    // A regular expression checking for prefixed number entries
     public static final Pattern numberPrefixPattern = Pattern.compile("No\\s?\\d+.*$");
 
     public IParser resolve(String input){
@@ -21,8 +20,6 @@ public class ParserResolver {
         final Matcher noPrefixMatcher = numberPrefixPattern.matcher(input);
 
         boolean startsWithNumber = matcher.lookingAt();
-
-
         boolean includesNoPrefix = noPrefixMatcher.find();
 
         if (includesNoPrefix) {
@@ -30,7 +27,7 @@ public class ParserResolver {
         } else if (startsWithNumber) {
             return new BackwardsStreetNameParser(input);
         } else {
-            return new GeneralAddressParcer(input);
+            return new GeneralAddressParser(input);
         }
     }
 

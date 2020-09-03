@@ -5,11 +5,11 @@ import java.util.regex.Pattern;
 /**
  * General address parser takes care of standard addresses in format "Streer name 42A"
  */
-public class GeneralAddressParcer extends BaseParser {
+public class GeneralAddressParser extends BaseParser {
 
     private static final Pattern SIMPLE_PATTERN = Pattern.compile("(.+?)(\\d+.+|\\d+)");
 
-    public GeneralAddressParcer(String input) {
+    public GeneralAddressParser(String input) {
         super(input, SIMPLE_PATTERN);
     }
 }
